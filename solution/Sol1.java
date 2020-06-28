@@ -1,6 +1,8 @@
+package solution;
+
 import java.util.Arrays;
 
-public class Solution1 {
+public class Sol1 {
     public static void main(String[] args) {
         Solution solution = new Solution();
 
