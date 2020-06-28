@@ -3,4 +3,4 @@ Java solution of problems from [LeetCode](https://leetcode.com/).
 
 | # | Title | Solution | Difficulty |
 |---| ----- | -------- | ---------- |
-|1|[Two Sum](https://leetcode.com/problems/two-sum/)|[Java](solution/Sol1.java)|Easy|
+|1|[Two Sum](https://leetcode.com/problems/two-sum/)|[Java](solution/Java/Sol1.java)|Easy|
