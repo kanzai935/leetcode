@@ -1,3 +1,2 @@
-solution/.idea/*
-solution/Python/.idea/*
-solution/Python/venv/*
+.idea/*
+venv/*
