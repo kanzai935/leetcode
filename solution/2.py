@@ -26,14 +26,10 @@ class Solution:
         sum_l1_l2: int = self.sum_reverse_order_list_node(l1) + self.sum_reverse_order_list_node(l2)
 
         sum_l1_l2_nums: List[int] = []
-        if sum_l1_l2 < 10:
-            sum_l1_l2_nums.append(sum_l1_l2)
-        else:
-            while sum_l1_l2 >= 10:
-                sum_l1_l2_nums.append(sum_l1_l2 % 10)
-                sum_l1_l2 //= 10
-                if sum_l1_l2 < 10:
-                    sum_l1_l2_nums.append(sum_l1_l2)
+        while sum_l1_l2 >= 10:
+            sum_l1_l2_nums.append(sum_l1_l2 % 10)
+            sum_l1_l2 //= 10
+        sum_l1_l2_nums.append(sum_l1_l2)
 
         node: ListNode = None
         nodes: List[ListNode] = []
