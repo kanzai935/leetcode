@@ -1,4 +1,7 @@
 # Definition for singly-linked list.
+from typing import List
+
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -6,20 +9,38 @@ class ListNode:
 
 
 class Solution:
-    def sumListNodeRevserse(self, li: ListNode) -> int:
-        return li.next.next.val * 100 + li.next.val * 10 + li.val
+    @staticmethod
+    def sum_reverse_order_list_node(li: ListNode) -> int:
+        nums: List[int] = []
+        while li.next is not None:
+            nums.append(li.val)
+            li = li.next
+        nums.append(li.val)
 
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        l1_l2_sum = self.sumListNodeRevserse(l1) + self.sumListNodeRevserse(l2)
+        sum_nums: int = 0
+        for i, num in enumerate(nums):
+            sum_nums += num * 10 ** i
+        return sum_nums
 
-        answer_list = []
+    def add_two_numbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        sum_l1_l2: int = self.sum_reverse_order_list_node(l1) + self.sum_reverse_order_list_node(l2)
 
-        while (l1_l2_sum > 10):
-            answer_list.append(l1_l2_sum % 10)
-            l1_l2_sum //= 10
-            if (l1_l2_sum < 10):
-                answer_list.append(l1_l2_sum)
+        sum_l1_l2_nums: List[int] = []
+        if sum_l1_l2 < 10:
+            sum_l1_l2_nums.append(sum_l1_l2)
+        else:
+            while sum_l1_l2 >= 10:
+                sum_l1_l2_nums.append(sum_l1_l2 % 10)
+                sum_l1_l2 //= 10
+                if sum_l1_l2 < 10:
+                    sum_l1_l2_nums.append(sum_l1_l2)
 
-        answer_list_node = []
-        for answer in answer_list[::-1]:
-            li = ListNode(answer)
+        node: ListNode = None
+        nodes: List[ListNode] = []
+        for i, num in enumerate(sum_l1_l2_nums[::-1]):
+            if i == 0:
+                node = ListNode(num, None)
+            else:
+                node = ListNode(num, nodes[i - 1])
+            nodes.append(node)
+        return node
