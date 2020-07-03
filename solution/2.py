@@ -13,16 +13,11 @@ class Solution:
     def sum_reverse_order_list_node(li: ListNode) -> int:
 
         nums: List[int] = []
-        while li.next is not None:
+        while li.next:
             nums.append(li.val)
             li = li.next
         nums.append(li.val)
-
-        sum_nums: int = 0
-        for i, num in enumerate(nums):
-            sum_nums += num * 10 ** i
-
-        return sum_nums
+        return sum([num * 10 ** i for i, num in enumerate(nums)])
 
     def add_two_numbers(self, l1: ListNode, l2: ListNode) -> ListNode:
 
@@ -37,10 +32,6 @@ class Solution:
         node: ListNode = None
         nodes: List[ListNode] = []
         for i, num in enumerate(sum_l1_l2_nums[::-1]):
-            if i == 0:
-                node = ListNode(num, None)
-            else:
-                node = ListNode(num, nodes[i - 1])
+            node = ListNode(num, None) if i == 0 else ListNode(num, nodes[i - 1])
             nodes.append(node)
-
         return node

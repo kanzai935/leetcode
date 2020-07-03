@@ -6,9 +6,8 @@ class Solution:
 
         answers: Dict[int, int] = {}
         for i, num in enumerate(nums):
-            x = target - num
+            x: int = target - num
             if x in answers:
                 return [answers[x], i]
             answers[num] = i
-
         return answers
