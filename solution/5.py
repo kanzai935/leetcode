@@ -2,23 +2,28 @@ from typing import List
 
 
 class Solution:
-    def longest_palindrome(self, s: str) -> str:
+    """
+    Input: s = "babad"
+    Output: "bab"
+    Note: "aba" is also a valid answer.
+    """
+    @staticmethod
+    def find_longest_palindrome(s: str) -> str:
 
-        strings: List[str] = list(s)
-        strings_length: int = len(strings)
+        strings_list: List[str] = list(s)
+        strings_list_length: int = len(strings_list)
 
         longest_str: str = ""
-        longest_length: int = 0
-        for i in range(strings_length):
-            for j in range(strings_length):
+        longest_str_length: int = 0
+        for i in range(strings_list_length):
+            for j in range(strings_list_length):
                 if i > j:
                     continue
 
-                strings_slice: List[str] = strings[i:j + 1]
-                strings_slice_length: int = len(strings_slice)
+                strings_list_slice: List[str] = strings_list[i:j + 1]
+                strings_list_slice_length: int = len(strings_list_slice)
 
-                if strings_slice == list(reversed(strings_slice)) and strings_slice_length > longest_length:
-                    longest_length = strings_slice_length
-                    longest_str = "".join(strings_slice)
-                    print(longest_length)
+                if strings_list_slice == list(reversed(strings_list_slice)) and strings_list_slice_length > longest_str_length:
+                    longest_str_length = strings_list_slice_length
+                    longest_str = "".join(strings_list_slice)
         return longest_str
