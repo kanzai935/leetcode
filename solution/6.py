@@ -9,6 +9,12 @@ class Solution:
     UA     M I     N M
     H       A       E
     ----------------
+    FMC
+    UAUIHI
+    YSINIU
+    UAMINM
+    HAE
+    ----------------
     Input: s = "FUYUHASAMUIMAINICHINEMUI", numRows = 5
     Output: "FMCUAUIHIYSINIUUAMINMHAE"
     """
