@@ -27,7 +27,7 @@ class Solution:
         count = 0
 
         for i in range(s_length):
-            if i % 5 != 0 and count * 5 < s_length:
+            if i % num_rows != 0 and count * num_rows < s_length:
                 continue
 
             s_list.append([])
@@ -37,29 +37,40 @@ class Solution:
                 count += 1
                 continue
 
-            if count % 2 == 0 and count * 5 < s_length:
-                s_list[count].append(s[i - count + 1:i + num_rows - count])
+            if count % 2 == 0 and count * num_rows < s_length:
+                s_list[count].append(str(0) + s[i - count + 1:i + num_rows - count])
 
-            elif count % 2 == 0 and count * 5 > s_length:
-                s_list[count].append(s[i:s_length])
-                break
+            elif count % 2 == 0 and count * num_rows > s_length:
+                s_list[count].append(str(0))
+                s_list[count][0] += s[i:s_length]
+                for j in range(num_rows - len(s[i:s_length]) - 1):
+                    s_list[count][0] += str(0)
+                    break
 
-            elif count % 2 != 0 and count * 5 < s_length:
-                s_list[count].append(s[i - count + 1:i + num_rows - count][::-1])
+            elif count % 2 != 0 and count * num_rows < s_length:
+                s_list[count].append(s[i - count + 1:i + num_rows - count][::-1] + str(0))
 
-            elif count % 2 != 0 and count * 5 > s_length:
-                s_list[count].append(s[i:s_length][::-1])
+            elif count % 2 != 0 and count * num_rows > s_length:
+                for j in range(num_rows - len(s[i:s_length][::-1]) - 1):
+                    if j == 0:
+                        s_list[count].append(str(0))
+                    else:
+                        s_list[count][0] += str(0)
+                s_list[count][0] += s[i:s_length][::-1] + str(0)
                 break
 
             count += 1
 
-        print(s_list)
+        converted_s = ""
 
-        s_1 = s[0:5]
-        s_2 = s[5:10-1][::-1]
-        s_3 = s[10-1:15-2]
-        s_4 = s[15-2:20-3][::-1]
-        s_5 = s[20-3:25-4]
-        s_6 = s[25-4:24][::-1]
+        for i in range(num_rows):
+            for j in range(len(s_list)):
+                if list(s_list[j][0])[i] != str(0):
+                    converted_s += s_list[j][0][i]
+
+        print(converted_s)
+        print(len(converted_s))
+
+        return converted_s
 
 Solution.convert("FUYUHASAMUIMAINICHINEMUI", 5)
