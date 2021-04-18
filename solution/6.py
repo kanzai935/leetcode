@@ -40,7 +40,7 @@ class Solution:
     Y I R
     ----------------
     Input: s = "PAYPALISHIRING", numRows = 3
-    Output: ""
+    Output: "PAHNAPLSIIGYIR"
     """
 
     @staticmethod
@@ -48,48 +48,55 @@ class Solution:
 
         s_list = []
         s_length = len(s)
-        count = 0
+        num_element = 0  # 文字列を入れる箱の数
 
         for i in range(s_length):
-            if i % num_rows != 0 and count * num_rows <= s_length:
+
+            if i % num_rows != 0 and num_element * num_rows <= s_length:
                 print("A")
                 continue
 
+            # 文字列を入れる箱を用意する
             s_list.append([])
 
+            # 1番目〜num_rows番目までの文字列を格納する
             if i == 0:
                 print("B")
-                s_list[count].append(s[i:i + num_rows - count])
-                count += 1
+                s_list[num_element].append(s[i:i + num_rows])
+                num_element += 1
                 continue
 
-            if count % 2 == 0 and count * num_rows <= s_length:
+            # 文字列を入れる箱の数が偶数かつ、格納している文字列の総数が文字列の長さより短いとき
+            if num_element % 2 == 0 and num_element * num_rows <= s_length:
                 print("C")
-                s_list[count].append(str(0) + s[i - count + 1:i + num_rows - count])
+                s_list[num_element].append(str(0) + s[i - num_element + 1:i + num_rows - num_element])
 
-            elif count % 2 == 0 and count * num_rows > s_length:
+            # 文字列を入れる箱の数が偶数かつ、格納している文字列の総数が文字列の長さより長いとき
+            elif num_element % 2 == 0 and num_element * num_rows > s_length:
                 print("D")
-                s_list[count].append(str(0))
-                s_list[count][0] += s[i:s_length]
+                s_list[num_element].append(str(0))
+                s_list[num_element][0] += s[i:s_length]
                 for j in range(num_rows - len(s[i:s_length]) - 1):
-                    s_list[count][0] += str(0)
+                    s_list[num_element][0] += str(0)
                 break
 
-            elif count % 2 != 0 and count * num_rows <= s_length:
+            # 文字列を入れる箱の数が奇数かつ、格納している文字列の総数が文字列の長さより短いとき
+            elif num_element % 2 != 0 and num_element * num_rows <= s_length:
                 print("E")
-                s_list[count].append(s[i - count + 1:i + num_rows - count][::-1] + str(0))
+                s_list[num_element].append(s[i - num_element + 1:i + num_rows - num_element][::-1] + str(0))
 
-            elif count % 2 != 0 and count * num_rows > s_length:
+            # 文字列を入れる箱の数が奇数かつ、格納している文字列の総数が文字列の長さより長いとき
+            elif num_element % 2 != 0 and num_element * num_rows > s_length:
                 print("F")
                 for j in range(num_rows - len(s[i:s_length][::-1]) - 1):
                     if j == 0:
-                        s_list[count].append(str(0))
+                        s_list[num_element].append(str(0))
                     else:
-                        s_list[count][0] += str(0)
-                s_list[count][0] += s[i:s_length][::-1] + str(0)
+                        s_list[num_element][0] += str(0)
+                s_list[num_element][0] += s[i:s_length][::-1] + str(0)
                 break
 
-            count += 1
+            num_element += 1
 
         converted_s = ""
 
